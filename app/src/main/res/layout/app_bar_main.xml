@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+    >
+            <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_baseline_dehaze_24"
+                    android:backgroundTint="@color/green_app_bar"
+                    android:id="@+id/add_element"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="156dp"
+                    android:layout_height="66dp"
+                    android:text="@string/temp"
+                    app:layout_constraintEnd_toStartOf="@+id/add_element2"
+                    app:layout_constraintStart_toEndOf="@+id/add_element"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <ImageButton
+                    android:backgroundTint="@color/green_app_bar"
+                    android:src="@drawable/ic_baseline_dehaze_24"
+                    android:id="@+id/add_element2"
+                    android:layout_width="68dp"
+                    android:layout_height="67dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+</FrameLayout>
