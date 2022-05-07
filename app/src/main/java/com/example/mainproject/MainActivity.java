@@ -1,26 +1,30 @@
 package com.example.mainproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import android.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.mainproject.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements MyCallBack {
     ActivityMainBinding binding;
     ElementFragment elementFragment = new ElementFragment();
-
+    EditText temptext;
+    private int Temp;
+    private char[] Temptext;
     FragmentManager fragmentManager = getFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    FragmentTransaction fragmentTransaction;
+    public ImageButton tempb, tempm;
+    RecyclerView recyclerView;
+    ArrayList<String> arrayList = new ArrayList<>();
 
 
 
@@ -29,29 +33,56 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        DrawerLayout drawerLayout = binding.drawer;
+        temptext = (EditText) findViewById(R.id.temptext);
 
-        findViewById(R.id.add_element).setOnClickListener(view -> {
-            drawerLayout.openDrawer(GravityCompat.START);
-        });
 
+        //реализация callback
+        elementFragment.registerCallBack(this);
+        //кнопка добавления фрагмента
         findViewById(R.id.add_element2).setOnClickListener(view -> {
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right);
             fragmentTransaction.replace(R.id.fragment_container, elementFragment);
-            findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
-            //fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-            /*while(!elementFragment.isRemoving()){
-                if (!elementFragment.buttonlife){
-                    fragmentTransaction.setCustomAnimations(R.animator.slide_in_right, R.animator.slide_in_left);
-                    findViewById(R.id.fragment_container).setVisibility(View.GONE);
-                    fragmentTransaction.remove(elementFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            }*/
+            //recyclerview
+
+
         });
 
+        //температура
+        Temp = 0;
+        tempb = (ImageButton) findViewById(R.id.tempb);
+        tempb.setOnClickListener(view -> {
+            long time = System.currentTimeMillis();
+            Temp++;
+            Temptext = Integer.toString(Temp).toCharArray();
+            temptext.setText(Temptext, 0, Temptext.length);
+        });
+        tempm = (ImageButton) findViewById(R.id.tempm);
+        tempm.setOnClickListener(view -> {
+            if (Temp>0){
+                Temp--;
+                Temptext = Integer.toString(Temp).toCharArray();
+                temptext.setText(Temptext, 0, Temptext.length);
+            }
+        });
+    }
+
+
+
+    public boolean isPressed(ImageButton tempb){
+        return tempb.isPressed();
+    }
+    //кнопка удаления фрагмента
+    @Override
+    public void callingback() {
+        fragmentTransaction  = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right);
+        if (elementFragment.isAdded()) {
+            fragmentTransaction.remove(elementFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
     }
 }
