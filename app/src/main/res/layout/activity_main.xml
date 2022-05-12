@@ -17,11 +17,18 @@
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-            <FrameLayout
+    <FrameLayout
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="235dp"
                 android:layout_height="match_parent"
                 android:id="@+id/fragment_container"
                 />
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/pole"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fragment_container"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

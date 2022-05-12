@@ -11,6 +11,7 @@
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.167" />
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.167" />
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.155" />
+        <entry key="..\:/Android/Projects/MainProject/app/src/main/res/drawable/ic_baseline_display_settings_24.xml" value="0.1565" />
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.167" />
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/layout/recycle.xml" value="0.18840579710144928" />
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/layout/recyclerview_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Projects/MainProject/app/src/main/res/menu/activity_main_drawer.xml" value="0.215625" />
+        <entry key="..\:/Android/Projects/MainProject/app/src/main/res/menu/recycle.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -10,15 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.mainproject.db.SubstanceItem;
+
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
-    private ArrayList<String> names;
+    private ArrayList<SubstanceItem> items;
     private final LayoutInflater inflater;
     private MyCallBack callback;
+    public ArrayList<SubstanceItem> elements = new ArrayList<>();
 
-    public RecyclerAdapter(Context context, ArrayList<String> names){
-        this.names = names;
+    public RecyclerAdapter(Context context, ArrayList<SubstanceItem> items){
+        this.items = items;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -33,28 +37,32 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String name = names.get(position);
-        holder.largeTextView.setText(name);
+        holder.titleTextView.setText(items.get(position).title);
+        holder.formulaTextView.setText(items.get(position).formula);
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                elements.add(items.get(position));
                 callback.callingback();
             }
         });
     }
 
+    public ArrayList<SubstanceItem> getElements(){return elements;}
 
     @Override
     public int getItemCount() {
-        return names.size();
+        return items.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public final TextView largeTextView;
+        public final TextView titleTextView;
+        public final TextView formulaTextView;
         public final Button button;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            largeTextView= (TextView) itemView.findViewById(R.id.largetextview);
+            titleTextView= (TextView) itemView.findViewById(R.id.title_textview);
+            formulaTextView = (TextView) itemView.findViewById(R.id.formula_textview);
             button = (Button) itemView.findViewById(R.id.recycleritembutton);
         }
     }

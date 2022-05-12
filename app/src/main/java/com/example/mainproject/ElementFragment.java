@@ -5,48 +5,46 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mainproject.db.MyDBManager;
+import com.example.mainproject.db.SubstanceItem;
 
 import java.util.ArrayList;
 
 
 public class ElementFragment extends Fragment {
-Button button;
+
     MyCallBack callback;
 RecyclerView recyclerView;
 RecyclerAdapter recyclerAdapter;
-ArrayList<String> arrayList = new ArrayList<>();
-private boolean recyclecreate = false;
+MyDBManager myDBManager;
 public void registerCallBack(MyCallBack callback){this.callback = callback;}
+
+    public void SetMyDBManager(MyDBManager myDBManager){
+    this.myDBManager = myDBManager;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setInitialData();
-
+        //setInitialData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflateView = inflater.inflate(R.layout.fragment_element, container, false);
+
+
+
+        //recycler
         recyclerView = (RecyclerView) inflateView.findViewById(R.id.recyclerview);
-        recyclerAdapter = new RecyclerAdapter(inflateView.getContext(), arrayList);
+        recyclerAdapter = new RecyclerAdapter(inflateView.getContext(), myDBManager.GetFromDB());
         recyclerAdapter.registerCallBack(callback);
         recyclerView.setAdapter(recyclerAdapter);
         return inflateView;
     }
-    private void setInitialData() {
-        arrayList.add("R");
-        arrayList.add("KOT");
-        arrayList.add("CAT");
-        arrayList.add("LOH");
-        arrayList.add("AER");
-        arrayList.add("SCX");
-        arrayList.add("aA");
-        arrayList.add("SGD");
-    }
-
+    public ArrayList<SubstanceItem> getElem(){return recyclerAdapter.getElements();}
 }
