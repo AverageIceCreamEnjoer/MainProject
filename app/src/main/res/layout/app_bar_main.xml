@@ -105,6 +105,21 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="203dp" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="reaction"
+                android:id="@+id/btn_reaction"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="clear"
+                android:id="@+id/btn_clear"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/reaction_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

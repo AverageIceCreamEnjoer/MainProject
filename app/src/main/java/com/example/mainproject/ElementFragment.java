@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mainproject.db.MyDBManager;
 import com.example.mainproject.db.SubstanceItem;
-
-import java.util.ArrayList;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 
 
 public class ElementFragment extends Fragment {
-
+    MaterialButtonToggleGroup buttonToggleGroup;
     MyCallBack callback;
 RecyclerView recyclerView;
 RecyclerAdapter recyclerAdapter;
@@ -29,7 +28,6 @@ public void registerCallBack(MyCallBack callback){this.callback = callback;}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setInitialData();
     }
 
     @Override
@@ -37,14 +35,36 @@ public void registerCallBack(MyCallBack callback){this.callback = callback;}
                              Bundle savedInstanceState) {
         View inflateView = inflater.inflate(R.layout.fragment_element, container, false);
 
-
-
         //recycler
         recyclerView = (RecyclerView) inflateView.findViewById(R.id.recyclerview);
-        recyclerAdapter = new RecyclerAdapter(inflateView.getContext(), myDBManager.GetFromDB());
-        recyclerAdapter.registerCallBack(callback);
-        recyclerView.setAdapter(recyclerAdapter);
+
+        //toggle_btn
+        buttonToggleGroup = inflateView.findViewById(R.id.toggle_base_btn);
+        buttonToggleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
+            @Override
+            public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+                if (isChecked){
+                    switch (checkedId){
+                        case R.id.btn_based:
+                            recyclerAdapter = new RecyclerAdapter(inflateView.getContext(), myDBManager.GetBasedFromDB());
+                            recyclerAdapter.registerCallBack(callback);
+                            recyclerView.setAdapter(recyclerAdapter);
+                            inflateView.findViewById(R.id.btn_based).setClickable(false);
+                            inflateView.findViewById(R.id.btn_created).setClickable(true);
+
+                            break;
+                        case R.id.btn_created:
+                            recyclerAdapter = new RecyclerAdapter(inflateView.getContext(), myDBManager.GetCreatedFromDB());
+                            recyclerAdapter.registerCallBack(callback);
+                            recyclerView.setAdapter(recyclerAdapter);
+                            inflateView.findViewById(R.id.btn_created).setClickable(false);
+                            inflateView.findViewById(R.id.btn_based).setClickable(true);
+                    }
+                }
+            }
+        });
+        inflateView.findViewById(R.id.btn_based).performClick();
         return inflateView;
     }
-    public ArrayList<SubstanceItem> getElem(){return recyclerAdapter.getElements();}
+    public SubstanceItem getElem(){return recyclerAdapter.getElements();}
 }

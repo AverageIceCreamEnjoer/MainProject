@@ -19,7 +19,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private ArrayList<SubstanceItem> items;
     private final LayoutInflater inflater;
     private MyCallBack callback;
-    public ArrayList<SubstanceItem> elements = new ArrayList<>();
+    public SubstanceItem elements;
 
     public RecyclerAdapter(Context context, ArrayList<SubstanceItem> items){
         this.items = items;
@@ -42,13 +42,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                elements.add(items.get(position));
+                elements = items.get(position);
                 callback.callingback();
             }
         });
     }
 
-    public ArrayList<SubstanceItem> getElements(){return elements;}
+    public SubstanceItem getElements(){return elements;}
 
     @Override
     public int getItemCount() {

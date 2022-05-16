@@ -9,20 +9,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="10dp">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:background="#D4D5D4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent">
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"
+                android:id="@+id/toggle_base_btn">
+                <Button
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:text="Based"
+                    android:id="@+id/btn_based"
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"
+                    />
+                <Button
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:text="created"
+                    android:id="@+id/btn_created"
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"/>
 
+            </com.google.android.material.button.MaterialButtonToggleGroup>
             <androidx.recyclerview.widget.RecyclerView
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/recyclerview_item"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/recyclerview"
-                android:background="@color/gray"/>
+                android:background="#D4D5D4"/>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
     </androidx.appcompat.widget.Toolbar>
