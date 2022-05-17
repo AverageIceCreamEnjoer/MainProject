@@ -1,5 +1,6 @@
 package com.example.mainproject;
 
 public interface MyCallBack {
-    void callingback();
+    void print_elem();
+    void leave();
 }

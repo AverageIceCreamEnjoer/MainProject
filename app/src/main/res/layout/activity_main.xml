@@ -12,11 +12,76 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <include
         android:id="@+id/app_bar_main"
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <LinearLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/card"
+        android:gravity="center"
+        android:id="@+id/envir_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
+        <Button
+            android:id="@+id/envir_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="67dp"
+            android:backgroundTint="#F3F3F3"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="Параметры Среды"
+            android:textColor="@color/teal_700"
+            />
+        <LinearLayout
+            android:id="@+id/et1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/teal_700"
+                android:text="P ="/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/et2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/teal_700"
+                android:text="T ="/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <Button
+            android:text="OK"
+            android:id="@+id/ok_btn"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/teal_700"
+            android:textColor="@color/teal_700"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    </LinearLayout>
+
     <FrameLayout
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="235dp"

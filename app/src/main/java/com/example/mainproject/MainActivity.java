@@ -1,14 +1,26 @@
 package com.example.mainproject;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static android.graphics.Color.parseColor;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import android.animation.LayoutTransition;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -37,12 +49,13 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
     RDBManager rdbManager;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        temptext = (EditText) findViewById(R.id.temptext);
+        //temptext = (EditText) findViewById(R.id.temptext);
         title_text = (TextView) findViewById(R.id.title_text);
         elements =  new ArrayList<>();
         reaction_text = (TextView) findViewById(R.id.reaction_text);
@@ -61,17 +74,44 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
         //кнопка добавления фрагмента
         findViewById(R.id.add_element2).setOnClickListener(view -> {
             findViewById(R.id.pole).setVisibility(View.VISIBLE);
-
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right);
             fragmentTransaction.replace(R.id.fragment_container, elementFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
+        //closeFragment
         findViewById(R.id.pole).setOnClickListener(view -> {
-            callingback();
+            leave();
         });
 
+        //envir_btn
+        LinearLayout envirContainer = findViewById(R.id.envir_views);
+        LayoutTransition layoutTransition = envirContainer.getLayoutTransition();
+        layoutTransition.setDuration(300);
+        layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
+        Button buttonEnvir = (Button) findViewById(R.id.envir_btn);
+        ViewGroup.LayoutParams layoutParams = envirContainer.getLayoutParams();
+        buttonEnvir.setOnClickListener(view -> {
+            envirContainer.setX(findViewById(R.id.app_bar).getWidth()/2 - envirContainer.getWidth()/2);
+            buttonEnvir.setVisibility(View.GONE);
+            findViewById(R.id.et1).setVisibility(View.VISIBLE);
+            findViewById(R.id.et2).setVisibility(View.VISIBLE);
+            findViewById(R.id.ok_btn).setVisibility(View.VISIBLE);
+            layoutParams.width = buttonEnvir.getWidth();
+            envirContainer.setLayoutParams(layoutParams);
+            ViewGroup.LayoutParams etparams = findViewById(R.id.et1).getLayoutParams();
+            etparams.width = layoutParams.width;
+            findViewById(R.id.et1).setLayoutParams(etparams);
+        });
+        findViewById(R.id.ok_btn).setOnClickListener(view -> {
+            findViewById(R.id.et1).setVisibility(View.GONE);
+            findViewById(R.id.et2).setVisibility(View.GONE);
+            buttonEnvir.setVisibility(View.VISIBLE);
+            findViewById(R.id.ok_btn).setVisibility(View.GONE);
+            //findViewById(R.id.envir_views).setBackgroundResource(R.color.teal_700);
+        });
+/*
         //температура
         tempb = (ImageButton) findViewById(R.id.tempb);
         tempb.setOnClickListener(view -> {
@@ -87,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
                 Temptext = Integer.toString(Temp).toCharArray();
                 temptext.setText(Temptext, 0, Temptext.length);
             }
-        });
+        });*/
         //reaction
         reaction_button = (Button) findViewById(R.id.btn_reaction);
         reaction_button.setOnClickListener(view -> {
@@ -129,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
     }
     //кнопка удаления фрагмента
     @Override
-    public void callingback() {
+    public void print_elem() {
         //Элементы на экране
         SubstanceItem substanceItem = elementFragment.getElem();
         if (substanceItem!=null)elements.add(substanceItem);
@@ -139,6 +179,10 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
             title_text.append(" ("+ elements.get(i).formula + ")");
             title_text.append("\n");
         }
+    }
+
+    @Override
+    public void leave() {
         //...
         findViewById(R.id.pole).setVisibility(View.GONE);
         //FT
@@ -149,6 +193,5 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
-
     }
 }

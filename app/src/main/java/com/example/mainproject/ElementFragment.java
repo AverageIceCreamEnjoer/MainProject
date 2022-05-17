@@ -63,6 +63,10 @@ public void registerCallBack(MyCallBack callback){this.callback = callback;}
                 }
             }
         });
+        //closeFragment
+        inflateView.findViewById(R.id.leave_btn).setOnClickListener(view -> {
+            callback.leave();
+        });
         inflateView.findViewById(R.id.btn_based).performClick();
         return inflateView;
     }

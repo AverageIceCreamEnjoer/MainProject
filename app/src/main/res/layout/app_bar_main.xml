@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -28,58 +29,7 @@
                     android:id="@+id/settings"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
-                    <androidx.cardview.widget.CardView
-                        android:backgroundTint="#D4D5D4"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_height="67dp"
-                        android:layout_width="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/settings"
-                        app:layout_constraintEnd_toStartOf="@id/add_element2">
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/textview"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="T="
-                                android:textSize="30dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/tempm"
-                                app:layout_constraintTop_toTopOf="parent" />
-                            <ImageButton
-                                android:backgroundTint="@color/teal_700"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_width="60dp"
-                                android:layout_height="match_parent"
-                                android:id="@+id/tempm"
-                                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"/>
-
-                            <ImageButton
-                                android:id="@+id/tempb"
-                                android:layout_width="60dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="110dp"
-                                android:backgroundTint="@color/teal_700"
-                                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                                app:layout_constraintStart_toEndOf="@id/tempm"
-                                app:layout_constraintTop_toTopOf="parent" />
-                            <EditText
-                                android:textColorHint="@color/black"
-                                android:textSize="30dp"
-                                android:text="273"
-                                android:inputType="number"
-                                app:layout_constraintEnd_toStartOf="@+id/tempb"
-                                android:id="@+id/temptext"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/textview"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </androidx.cardview.widget.CardView>
                 <ImageButton
                     android:backgroundTint="@color/teal_700"
                     android:src="@drawable/ic_baseline_dehaze_24"
@@ -109,12 +59,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="reaction"
-                android:id="@+id/btn_reaction"/>
+                android:id="@+id/btn_reaction"
+                android:backgroundTint="#F3F3F3"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/teal_700"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="clear"
-                android:id="@+id/btn_clear"/>
+                android:id="@+id/btn_clear"
+                android:backgroundTint="#F3F3F3"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/teal_700"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
