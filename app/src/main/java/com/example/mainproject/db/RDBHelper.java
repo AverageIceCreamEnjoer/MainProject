@@ -16,8 +16,8 @@ public class RDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //db_reactions
         sqLiteDatabase.execSQL(MyConstans.REACTION_TABLE_STRUCTURE);
-        insertToRDB("012", 5, sqLiteDatabase);
-        insertToRDB("35", 6, sqLiteDatabase);
+        insertToRDB("0.1.2.", 5, sqLiteDatabase);
+        insertToRDB("3.5.", 6, sqLiteDatabase);
     }
 
     @Override

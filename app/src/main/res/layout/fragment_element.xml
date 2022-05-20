@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:elevation="10dp">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@drawable/fragment"
+            android:background="@drawable/add_elem_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,19 +21,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:singleSelection="true"
-                android:id="@+id/toggle_base_btn">
+                android:id="@+id/toggle_base_btn"
+                android:layout_marginLeft="2dp">
                 <Button
+
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="Based"
+                    android:textColor="?attr/colorOnSecondary"
                     android:id="@+id/btn_based"
-                    android:layout_width="112dp"
+                    android:layout_width="105dp"
                     android:layout_height="wrap_content"
                     />
                 <Button
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="created"
+                    android:textColor="?attr/colorOnSecondary"
                     android:id="@+id/btn_created"
-                    android:layout_width="112dp"
+                    android:layout_width="105dp"
                     android:layout_height="wrap_content"/>
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -42,19 +46,21 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/recyclerview_item"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="625dp"
                 android:id="@+id/recyclerview"
-                android:background="#D4D5D4"/>
+                android:background="?attr/colorSecondaryVariant"/>
             <Button
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/leave_btn"
                 android:text="Ok"
-                android:backgroundTint="#D4D5D4"
+                android:textColor="?attr/colorOnBackground"
+                android:backgroundTint="?attr/colorSecondaryVariant"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/teal_700"
+                app:strokeColor="?attr/colorPrimary"
                 />
 
 

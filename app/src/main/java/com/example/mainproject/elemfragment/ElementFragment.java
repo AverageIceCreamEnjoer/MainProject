@@ -1,4 +1,4 @@
-package com.example.mainproject;
+package com.example.mainproject.elemfragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mainproject.MyCallBack;
+import com.example.mainproject.R;
 import com.example.mainproject.db.MyDBManager;
 import com.example.mainproject.db.SubstanceItem;
 import com.google.android.material.button.MaterialButtonToggleGroup;

@@ -5,7 +5,7 @@
     android:id="@+id/nav_graph">
     <fragment
         android:id="@+id/elementFragemnt5"
-        android:name="com.example.mainproject.ElementFragment"
+        android:name="com.example.mainproject.elemfragment.ElementFragment"
         android:label="fragment_element"
         tools:layout="@layout/fragment_element" >
         <action

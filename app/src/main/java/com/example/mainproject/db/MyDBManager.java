@@ -74,4 +74,38 @@ public class MyDBManager {
         cursor.close();
         return tempList;
     }
+    public boolean CreateProduct(String name, String formula){
+        Cursor cursor = db.query(MyConstans.TABLE_NAME, new String[] {MyConstans.TITLE, MyConstans._ID}, MyConstans.TITLE + " = ? OR " + MyConstans.FORMULA+" = ?",new String[] {name, formula}, null, null, null);
+        if (!cursor.moveToFirst()){
+            cursor = db.query(MyConstans.TABLE_NAME, null,null,null,null,null,null);
+            myDBHELPER.insertToSDB(name,formula,cursor.getCount()+1, 1, db);
+            cursor.close();
+            return true;
+        } else {
+            cursor.close();
+            return false;
+        }
+    }
+    public boolean isExist(String name){
+        Cursor cursor = db.query(MyConstans.TABLE_NAME, new String[] {MyConstans.TITLE}, MyConstans.TITLE + " = ?" , new String[] {name},null,null,null);
+        if (cursor.moveToFirst()){
+            cursor.close();
+            return true;
+        } else{
+            cursor.close();
+            return true;
+        }
+    }
+    public Integer getUnicode(String name){
+        Cursor cursor = db.query(MyConstans.TABLE_NAME, null, MyConstans.TITLE + " = ? OR " + MyConstans.FORMULA+" = ?",new String[] {name,name}, null,null, null);
+        if (cursor.moveToFirst()){
+            Integer k = null;
+            k = cursor.getInt(cursor.getColumnIndex(MyConstans.UNICODE));
+            cursor.close();
+            return k;
+        } else {
+            cursor.close();
+            return null;
+        }
+    }
 }

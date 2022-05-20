@@ -8,15 +8,18 @@
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?attr/colorSecondaryVariant">
 
     <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/app_bar_background"
+        >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -25,13 +28,13 @@
                     android:layout_width="67dp"
                     android:layout_height="67dp"
                     android:src="@drawable/ic_baseline_display_settings_24"
-                    android:backgroundTint="@color/teal_700"
+                    android:backgroundTint="?attr/colorSecondary"
                     android:id="@+id/settings"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageButton
-                    android:backgroundTint="@color/teal_700"
+                    android:backgroundTint="?attr/colorSecondary"
                     android:src="@drawable/ic_baseline_dehaze_24"
                     android:id="@+id/add_element2"
                     android:layout_width="68dp"
@@ -50,7 +53,7 @@
             android:padding="20dp">
 
             <TextView
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnBackground"
                 android:id="@+id/title_text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
@@ -60,20 +63,23 @@
                 android:layout_height="wrap_content"
                 android:text="reaction"
                 android:id="@+id/btn_reaction"
-                android:backgroundTint="#F3F3F3"
+                android:backgroundTint="?attr/colorSecondary"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/teal_700"
+                app:strokeColor="?attr/colorPrimary"
+                android:textColor="?attr/colorOnSecondary"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="clear"
                 android:id="@+id/btn_clear"
-                android:backgroundTint="#F3F3F3"
+                android:backgroundTint="?attr/colorSecondary"
                 app:strokeWidth="1dp"
-                app:strokeColor="@color/teal_700"
+                app:strokeColor="?attr/colorPrimary"
+                android:textColor="?attr/colorOnSecondary"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
             <TextView
+                android:textColor="?attr/colorOnBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/reaction_text"

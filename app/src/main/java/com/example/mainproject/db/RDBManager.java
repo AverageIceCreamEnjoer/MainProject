@@ -27,4 +27,7 @@ public class RDBManager {
         cursor.close();
         return reactionItems;
     }
+    public void createReaction(String reogents, int product){
+        rdbHelper.insertToRDB(reogents, product,sqLiteDatabase);
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.mainproject;
+package com.example.mainproject.elemfragment;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.mainproject.MyCallBack;
+import com.example.mainproject.R;
 import com.example.mainproject.db.SubstanceItem;
 
 import java.util.ArrayList;

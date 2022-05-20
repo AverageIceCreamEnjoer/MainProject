@@ -19,7 +19,7 @@ public class MyConstans {
     public static final String REACTION_ID = "_id";
     public static final String PRODUCT = "product";
     public static final String SUBJECTS = "subjects";
-    public static final int REACTION_DB_VERSION = 1;
+    public static final int REACTION_DB_VERSION = 3;
     public static final String REACTION_TABLE_STRUCTURE = "CREATE TABLE IF NOT EXISTS " +
             REACTION_TABLE_NAME + " (" + REACTION_ID + " INTEGER PRIMARY KEY,"+
             PRODUCT + " INTEGER," + SUBJECTS + " TEXT)";
