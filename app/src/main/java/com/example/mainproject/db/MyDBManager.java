@@ -28,13 +28,15 @@ public class MyDBManager {
         db.update(MyConstans.TABLE_NAME, cv, MyConstans.BASED + " = ?", new String[] {"0"});
     }
 
-    public SubstanceItem GetProduct(Integer unicode){
+    public SubstanceItem GetProduct(Integer unicode, boolean based){
         if (unicode==null)return null;
         String s = "unicode = ?";
         SubstanceItem substanceItem = null;
-        ContentValues cv = new ContentValues();
-        cv.put(MyConstans.BASED, 0);
-        db.update(MyConstans.TABLE_NAME, cv, MyConstans.UNICODE + " = ?",new String[] {Integer.toString(unicode)});
+        if (based) {
+            ContentValues cv = new ContentValues();
+            cv.put(MyConstans.BASED, 0);
+            db.update(MyConstans.TABLE_NAME, cv, MyConstans.UNICODE + " = ? AND " + MyConstans.BASED + " IS NULL", new String[]{Integer.toString(unicode)});
+        }
         Cursor cursor = db.query(MyConstans.TABLE_NAME,null, s,new String[]{Integer.toString(unicode)},null,null,null,null);
         while(cursor.moveToNext()) {
             String title = cursor.getString(cursor.getColumnIndex(MyConstans.TITLE));

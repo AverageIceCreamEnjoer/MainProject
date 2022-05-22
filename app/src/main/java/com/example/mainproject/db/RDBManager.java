@@ -3,6 +3,7 @@ package com.example.mainproject.db;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -30,4 +31,17 @@ public class RDBManager {
     public void createReaction(String reogents, int product){
         rdbHelper.insertToRDB(reogents, product,sqLiteDatabase);
     }
-}
+    public String getRandomReaction(String unicode){
+        Cursor cursor = sqLiteDatabase.query(MyConstans.REACTION_TABLE_NAME, new String[] {MyConstans.SUBJECTS}, MyConstans.SUBJECTS + " LIKE ?", new String[] {"%"+unicode+"%"},null,null,null);
+         ArrayList<String> arrayList = new ArrayList<>();
+        while (cursor.moveToNext()){
+
+            String b = cursor.getString(cursor.getColumnIndex(MyConstans.SUBJECTS));
+                 arrayList.add(b);
+             }
+             cursor.close();
+             if (arrayList.size()>0){
+                 return arrayList.get((int)(Math.random()*(arrayList.size())));
+             } else return "0";
+
+}}

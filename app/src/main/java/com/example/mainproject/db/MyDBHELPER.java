@@ -23,7 +23,6 @@ public class MyDBHELPER extends SQLiteOpenHelper {
         insertToSDB("Соль","NaCl",3,1, sqLiteDatabase);
         insertToSDB("Гидрокарбонат аммония", "NH4HCO3", 5, null, sqLiteDatabase);
         insertToSDB("Сода", "NaHCO3", 6, null, sqLiteDatabase);
-
     }
 
     @Override

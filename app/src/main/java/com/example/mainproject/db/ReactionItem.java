@@ -1,11 +1,11 @@
 package com.example.mainproject.db;
 
 public class ReactionItem {
-    public final String subjects;
-    public final int product;
+    public final Integer product;
+    public final String reaction;
 
-    public ReactionItem(String subjects, int product) {
-        this.subjects = subjects;
+    public ReactionItem(Integer product, String reaction) {
         this.product = product;
+        this.reaction = reaction;
     }
 }

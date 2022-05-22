@@ -45,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(View view) {
                 elements = items.get(position);
-                callback.print_elem();
+                callback.print_elem(false);
             }
         });
     }

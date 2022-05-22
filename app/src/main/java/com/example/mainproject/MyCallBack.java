@@ -3,7 +3,7 @@ package com.example.mainproject;
 import java.util.ArrayList;
 
 public interface MyCallBack {
-    void print_elem();
+    void print_elem(boolean x);
     void leave();
     void clear();
     void theme();

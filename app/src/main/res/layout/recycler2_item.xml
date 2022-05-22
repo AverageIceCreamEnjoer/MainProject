@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:padding="5dp"
-    android:background="?attr/colorSecondary"
+    android:background="?attr/colorSecondaryVariant"
     >
 
     <androidx.cardview.widget.CardView
-        android:elevation="10dp"
+        app:cardElevation="10dp"
         app:cardCornerRadius="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,12 +18,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/app_bar_back">
+            android:background="@drawable/recycler2_background">
             <TextView
                 android:textSize="18dp"
                 android:padding="16dp"
-                android:textColor="?attr/colorOnSecondary"
-                android:id="@+id/title_textview"
+                android:textColor="?attr/colorOnBackground"
+                android:id="@+id/title_textview2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,18 +33,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:id="@+id/formula_textview"
-                app:layout_constraintStart_toEndOf="@id/title_textview"
+                android:id="@+id/formula_textview2"
+                app:layout_constraintStart_toEndOf="@id/title_textview2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:textColor="@color/blue"/>
+            <ImageButton
+                android:id="@+id/delete_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintWidth_percent="0.15"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ic_baseline_delete_outline_24"
+                android:backgroundTint="?attr/colorSecondaryVariant"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-    <Button
-        android:visibility="visible"
-        android:backgroundTint="#00000000"
-        android:id="@+id/recycleritembutton"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

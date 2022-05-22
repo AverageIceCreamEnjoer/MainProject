@@ -69,7 +69,7 @@
                         android:layout_marginRight="4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_brightness_high_24"
+                        android:src="@drawable/ic_baseline_brightness_3_24"
                         android:layout_marginTop="3dp"/>
                     <androidx.appcompat.widget.SwitchCompat
                         app:track="@drawable/switch_face"
@@ -81,7 +81,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_brightness_3_24"
+                        android:src="@drawable/ic_baseline_brightness_high_24"
                         android:layout_marginTop="3dp"/>
                 </LinearLayout>
                 <Button

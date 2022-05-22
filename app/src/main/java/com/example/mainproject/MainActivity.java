@@ -6,6 +6,8 @@ import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.LayoutTransition;
 import android.app.FragmentManager;
@@ -24,8 +26,10 @@ import com.example.mainproject.createFragment.CreateFragment;
 import com.example.mainproject.databinding.ActivityMainBinding;
 import com.example.mainproject.db.MyDBManager;
 import com.example.mainproject.db.RDBManager;
+import com.example.mainproject.db.ReactionItem;
 import com.example.mainproject.db.SubstanceItem;
 import com.example.mainproject.elemfragment.ElementFragment;
+import com.example.mainproject.elemfragment.RecyclerAdapter;
 import com.example.mainproject.settingsfragment.SettingsFragment;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
@@ -36,20 +40,18 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity implements MyCallBack {
     ActivityMainBinding binding;
     ElementFragment elementFragment;
-    EditText temptext;
-    private int Temp;
-    private char[] Temptext;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    public ImageButton tempb, tempm, settings;
     private MyDBManager myDBManager;
     public ArrayList<SubstanceItem> elements;
-    TextView title_text, reaction_text;
-    Button reaction_button, clean_button;
+    TextView reaction_text,formula_text;
+    Button reaction_button, clear_button;
     RDBManager rdbManager;
     SettingsFragment settingsFragment;
     CreateFragment createFragment;
-    boolean t = false;
+    RecyclerView recyclerView;
+    Recycler2Adapter recyclerAdapter;
+    String reactionItem;
 
 
     @Override
@@ -57,17 +59,18 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        title_text = (TextView) findViewById(R.id.title_text);
         elements =  new ArrayList<>();
         fragmentManager = getFragmentManager();
         reaction_text = (TextView) findViewById(R.id.reaction_text);
+        formula_text = (TextView) findViewById(R.id.tv_formula);
         elementFragment = new ElementFragment();
         settingsFragment = new SettingsFragment();
         settingsFragment.getcontext(this);
         createFragment = new CreateFragment();
         createFragment.set_context(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview2);
 
-        if(AppCompatDelegate.getDefaultNightMode()==MODE_NIGHT_YES){
+        if(AppCompatDelegate.getDefaultNightMode()==MODE_NIGHT_NO){
             settingsFragment.setClick();
         }
 
@@ -83,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
         elementFragment.registerCallBack(this);
         settingsFragment.registerCallBack(this);
         createFragment.registerCallBack(this);
+
 
         //кнопка добавления фрагмента
         findViewById(R.id.add_element2).setOnClickListener(view -> {
@@ -118,28 +122,68 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
         //reaction
         reaction_button = (Button) findViewById(R.id.btn_reaction);
         reaction_button.setOnClickListener(view -> {
-            String reaction_product = "";
-            ArrayList<Integer> subjects = new ArrayList<>();
-            for (int i = 0; i < elements.size(); i++) {
-                subjects.add(elements.get(i).unicode);
-            }
-            Collections.sort(subjects);
-            for (int i = 0; i < subjects.size(); i++) {
-                reaction_product+=subjects.get(i)+".";
-            }
-            SubstanceItem substanceItem = myDBManager.GetProduct(rdbManager.GetReaction(reaction_product));
-            if (substanceItem!=null) {
-                reaction_text.append(substanceItem.title);
-                reaction_text.append(" (" + substanceItem.formula + ")");
-                reaction_text.append("\n");
+            if (elements.size()==0){
+                Toast.makeText(this, "Добавьте хотя бы один реагент", Toast.LENGTH_LONG).show();
+            } else {
+                String reaction_product = "";
+                ArrayList<Integer> subjects = new ArrayList<>();
+                for (int i = 0; i < elements.size(); i++) {
+                    subjects.add(elements.get(i).unicode);
+                }
+                Collections.sort(subjects);
+                for (int i = 0; i < subjects.size(); i++) {
+                    reaction_product += "." + subjects.get(i) + ".";
+                }
+                SubstanceItem substanceItem = myDBManager.GetProduct(rdbManager.GetReaction(reaction_product), true);
+                if (substanceItem != null) {
+                    reaction_text.setText("");
+                    reaction_text.append(substanceItem.title);
+                    reaction_text.append(" (" + substanceItem.formula + ")");
+                    formula_text.setText("");
+                    for (int i = 0; i < elements.size(); i++) {
+                        if (i!=elements.size()-1){
+                            formula_text.append(elements.get(i).formula + " + ");
+                        }else formula_text.append(elements.get(i).formula + " -> ");
+                    }
+                    formula_text.append(substanceItem.formula);
+                } else {
+                    reaction_text.setText("В базе данных нет такой реакции");
+                    formula_text.setText("");
+                    reaction_product = "."+Integer.toString(subjects.get((int)(Math.random()*elements.size())))+".";
+                    reactionItem = rdbManager.getRandomReaction(reaction_product);
+                    if (reactionItem!="0") {
+                        reaction_text.setText("Возможно, вы имели в виду это:");
+                        char[] z = reactionItem.toCharArray();
+                        ArrayList<Integer> arrayList = new ArrayList<>();
+                        String y = "";
+                        for (int i = 0; i < z.length-1; i++) {
+                            if (z[i+1]!='.'){
+                                y+=Character.toString(z[i+1]);
+                            }else {
+                                if (y!="") {
+                                    arrayList.add(Integer.parseInt(y));
+                                    y = "";
+                                }
+                            }
+                        }
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            if (i!=arrayList.size()-1) {
+                                formula_text.append(myDBManager.GetProduct(arrayList.get(i), false).formula + " + ");
+                            } else formula_text.append(myDBManager.GetProduct(arrayList.get(i),false).formula);
+                        }
+                        formula_text.append(" -> " + myDBManager.GetProduct(rdbManager.GetReaction(reactionItem),false).formula);
+                    }
+                }
             }
         });
-        //clean
-        clean_button = (Button) findViewById(R.id.btn_clear);
-        clean_button.setOnClickListener(view -> {
-            title_text.setText("");
+        //clear
+        clear_button = (Button) findViewById(R.id.btn_clear);
+        clear_button.setOnClickListener(view -> {
             reaction_text.setText("");
             elements.clear();
+            formula_text.setText("");
+            recyclerAdapter = new Recycler2Adapter(this, elements,this);
+            recyclerView.setAdapter(recyclerAdapter);
         });
     }
 
@@ -152,11 +196,14 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
     }
     //кнопка удаления фрагмента
     @Override
-    public void print_elem() {
+    public void print_elem(boolean x) {
         //Элементы на экране
-        SubstanceItem substanceItem = elementFragment.getElem();
-        if (substanceItem!=null)elements.add(substanceItem);
-        title_text.setText("");
+        SubstanceItem substanceItem;
+        if(!x) {
+            substanceItem = elementFragment.getElem();
+            if (substanceItem!=null)elements.add(substanceItem);
+        }
+
         for (int i = 0; i < elements.size(); i++) {
             for (int j = 0; j < elements.size(); j++) {
                 if (i!=j&&elements.get(i)==elements.get(j)){
@@ -164,11 +211,9 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
                 }
             }
         }
-        for (int i = 0; i<elements.size();i++) {
-            title_text.append(elements.get(i).title);
-            title_text.append(" ("+ elements.get(i).formula + ")");
-            title_text.append("\n");
-        }
+        //recycler
+        recyclerAdapter = new Recycler2Adapter(this, elements,this);
+        recyclerView.setAdapter(recyclerAdapter);
     }
 
     @Override
@@ -197,12 +242,12 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
         fragmentTransaction.remove(settingsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-                if(AppCompatDelegate.getDefaultNightMode()==MODE_NIGHT_YES){
-                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
+                if(AppCompatDelegate.getDefaultNightMode()==MODE_NIGHT_NO){
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
                     //findViewById(R.id.app_bar).setBackgroundResource(R.drawable.app_bar_background);
                 }
                 else {
-                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO);
                     //findViewById(R.id.app_bar).setBackgroundResource(R.drawable.app_bar_background);
                 }
         }
@@ -273,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements MyCallBack {
                 Collections.sort(reagents);
                 String s = "";
                 for (int i = 0; i < reagents.size(); i++) {
-                    s+=reagents.get(i)+".";
+                    s+="."+reagents.get(i)+".";
                 }
                 rdbManager.createReaction(s,name_unicode);
 
